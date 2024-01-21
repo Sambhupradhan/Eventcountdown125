@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Countdown</title>
+
+  <style>
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    html,body {
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      position: relative;
+      background-color: #dadada;
+      z-index: 1;
+      height: 100vh;
+      width: 100vw;
+    }
+    #box{
+        background-color: #85c5c5;
+        position: absolute;
+        top: 20%;
+        left: 50%;
+        transform: translate(-50% , -50%);
+        height: 20%;
+        width: 40%;
+        z-index: 9;
+    }
+    p{
+        background: -webkit-linear-gradient(#d6b6a7, #cae698);
+        -webkit-background-clip: text; 
+        -webkit-text-fill-color: transparent ;
+        font-size:8vh;
+        z-index: 99;
+    }
+  </style>
+</head>
+<body>
+
+    <div id="box">
+       <h1>Event Countdown</h1>
+       <p id="countdown"></p>
+       <h2 id="given-time"></h2> 
+   </div>
+
+  <script>
+    // Set the date we're counting down to
+    var data = "Jan 31, 2024 00:00:00";
+    var countDownDate = new Date(data).getTime();
+
+    // Update the countdown every 1 second
+    var x = setInterval(function() {
+      // Get the current date and time
+      var now = new Date().getTime();
+
+      // Calculate the time remaining
+      var distance = countDownDate - now;
+
+      // Calculate days, hours, minutes, and seconds
+      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      // Display the countdown
+      document.getElementById("countdown").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+      document.getElementById("given-time").innerHTML = "to <br>"+data ;
+      // If the countdown is over, display a message
+      if (distance < 0) {
+        clearInterval(x);
+        document.getElementById("countdown").innerHTML = "Event has started!";
+      }
+    }, 1000);
+  </script>
+
+</body>
+</html>
